@@ -15,4 +15,12 @@ public class GlobalExceptionController {
         modelAndView.addObject("errormsg", e.getMessage());
         return modelAndView;
     }
+
+    @ExceptionHandler(HolidayNotFound.class)
+    public ModelAndView holidayException(HolidayNotFound holidayNotFound){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error");
+        modelAndView.addObject("errormsg", holidayNotFound.getMessage());
+        return modelAndView;
+    }
 }
