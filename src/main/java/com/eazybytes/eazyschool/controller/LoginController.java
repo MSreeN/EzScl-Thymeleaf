@@ -22,6 +22,7 @@ public class LoginController {
             errorMessge = "You have been successfully logged out !!";
         }
         model.addAttribute("errorMessge", errorMessge);
+//        throw new RuntimeException("Something wrong");
         return "login.html";
     }
 
