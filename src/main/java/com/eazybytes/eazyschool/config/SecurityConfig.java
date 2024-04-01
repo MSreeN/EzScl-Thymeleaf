@@ -19,27 +19,45 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain defalutSecurityFilterChain(HttpSecurity http) throws Exception{
+        http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests(request ->
             request.requestMatchers("/courses").authenticated()
                     .anyRequest().permitAll()
-                    )
-            .formLogin(Customizer.withDefaults());
+                    );
+            http.formLogin(loginConfig -> loginConfig.loginPage("/login").permitAll()
+                    .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true")
+                    .permitAll()
+
+            );
+            http.logout(logoutConfig -> logoutConfig.logoutSuccessUrl("/login?logout=true")
+                    .invalidateHttpSession(true));
             http.httpBasic(Customizer.withDefaults());
            return http.build();
     }
 
     @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
-        PasswordEncoder passwordEncoder = passwordEncoder();
-        Function<String, String> pe = passwordEncoder::encode;
-        UserDetails user = User.builder()
-                .passwordEncoder(pe)
+//        PasswordEncoder passwordEncoder = passwordEncoder();
+//        Function<String, String> pe = passwordEncoder::encode;
+//        UserDetails user = User.builder()
+//                .passwordEncoder(pe)
+//                .username("user")
+//                .password("1234")
+//                .roles("user")
+//                .build();
+//        UserDetails admin = User.builder()
+//                .passwordEncoder(pe)
+//                .username("admin")
+//                .password("1234")
+//                .roles("user", "admin")
+//                .build();
+
+        UserDetails user = User.withDefaultPasswordEncoder()
                 .username("user")
                 .password("1234")
                 .roles("user")
                 .build();
-        UserDetails admin = User.builder()
-                .passwordEncoder(pe)
+        UserDetails admin = User.withDefaultPasswordEncoder()
                 .username("admin")
                 .password("1234")
                 .roles("user", "admin")
