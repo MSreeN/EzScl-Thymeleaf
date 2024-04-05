@@ -47,11 +47,13 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
         MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
 
-        http.csrf((csrf) -> csrf.ignoringRequestMatchers(mvcMatcherBuilder.pattern("/saveMsg")))
+        http.csrf((csrf) -> csrf.ignoringRequestMatchers(mvcMatcherBuilder.pattern("/saveMsg"))
+                        .ignoringRequestMatchers("/public/**"))
                 .authorizeHttpRequests((requests) -> requests.requestMatchers(mvcMatcherBuilder.pattern("/dashboard")).authenticated()
                         .requestMatchers("/displayMessages").hasRole("admin")
                         .requestMatchers("/closeMsg/**").hasRole("admin")
                         .requestMatchers("").permitAll()
+                        .requestMatchers("/public/**").permitAll()
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/home").permitAll()
