@@ -6,7 +6,9 @@ import lombok.Getter;
 public enum EazySchoolConstants {
     ANONYMOUS("Anonymous"),
     OPEN("Open"),
-    CLOSE("Close");
+    CLOSE("Close"),
+    STUDENT_ROLE("Student"),
+    ADMIN_ROLE("Role");
     EazySchoolConstants(String value){
         this.value = value;
     }
