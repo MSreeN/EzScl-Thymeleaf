@@ -5,9 +5,14 @@ import com.eazybytes.eazyschool.model.Person;
 import com.eazybytes.eazyschool.model.Roles;
 import com.eazybytes.eazyschool.repository.PersonRepository;
 import com.eazybytes.eazyschool.repository.RolesRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
+@Slf4j
 @Service
 public class PersonService {
 
@@ -19,9 +24,13 @@ public class PersonService {
 
     public boolean createNewPerson(Person person){
         Roles role = rolesRepository.getByRoleName(EazySchoolConstants.STUDENT_ROLE.getValue());
+    Optional<Person> existedPersons = personRepository.findByEmail(person.getEmail());
+        if(existedPersons.isPresent()){
+            return false;
+        }
         person.setRole(role);
         Person person1  = personRepository.save(person);
-        if(person1 != null && person1.getPersonId() > 1){
+        if(person1 != null && person1.getPersonId() > 0){
             return true;
         }
         return false;

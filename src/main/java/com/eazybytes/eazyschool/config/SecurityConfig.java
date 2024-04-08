@@ -74,40 +74,40 @@ public class SecurityConfig {
         return http.build();
 
     }
+}
 
-
-    @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
-//        PasswordEncoder passwordEncoder = passwordEncoder();
-//        Function<String, String> pe = passwordEncoder::encode;
-//        UserDetails user = User.builder()
-//                .passwordEncoder(pe)
+//    @Bean
+//    public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
+////        PasswordEncoder passwordEncoder = passwordEncoder();
+////        Function<String, String> pe = passwordEncoder::encode;
+////        UserDetails user = User.builder()
+////                .passwordEncoder(pe)
+////                .username("user")
+////                .password("1234")
+////                .roles("user")
+////                .build();
+////        UserDetails admin = User.builder()
+////                .passwordEncoder(pe)
+////                .username("admin")
+////                .password("1234")
+////                .roles("user", "admin")
+////                .build();
+//
+//        UserDetails user = User.withDefaultPasswordEncoder()
 //                .username("user")
 //                .password("1234")
 //                .roles("user")
 //                .build();
-//        UserDetails admin = User.builder()
-//                .passwordEncoder(pe)
+//        UserDetails admin = User.withDefaultPasswordEncoder()
 //                .username("admin")
 //                .password("1234")
-//                .roles("user", "admin")
+//                .roles("admin")
 //                .build();
-
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("1234")
-                .roles("user")
-                .build();
-        UserDetails admin = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("1234")
-                .roles("admin")
-                .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
-    }
-
-    PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-}
+//
+//        return new InMemoryUserDetailsManager(user, admin);
+//    }
+//
+//    PasswordEncoder passwordEncoder(){
+//        return new BCryptPasswordEncoder();
+//    }
+//}
