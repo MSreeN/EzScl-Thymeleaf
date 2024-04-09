@@ -21,26 +21,6 @@ import java.util.function.Function;
 @Configuration
 public class SecurityConfig {
 
-//    @Bean
-//    SecurityFilterChain defalutSecurityFilterChain(HttpSecurity http) throws Exception{
-//        http.csrf(csrf -> csrf.ignoringRequestMatchers("/saveMsg")
-//                .ignoringRequestMatchers(PathRequest.toH2Console()));
-//        http.authorizeHttpRequests(request ->
-//            request.requestMatchers("/courses").authenticated()
-//                    .requestMatchers("/dashboard").authenticated()
-//                    .anyRequest().permitAll()
-//                    .requestMatchers(PathRequest.toH2Console()).permitAll()
-//                    );
-//            http.formLogin(loginConfig -> loginConfig.loginPage("/login").permitAll()
-//                    .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true")
-//                    .permitAll()
-//
-//            );
-//            http.logout(logoutConfig -> logoutConfig.logoutSuccessUrl("/login?logout=true")
-//                    .invalidateHttpSession(true));
-//            http.httpBasic(Customizer.withDefaults());
-//           return http.build();
-//    }
 
 
     @Bean
@@ -73,6 +53,11 @@ public class SecurityConfig {
 
         return http.build();
 
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }
 
@@ -109,5 +94,26 @@ public class SecurityConfig {
 //
 //    PasswordEncoder passwordEncoder(){
 //        return new BCryptPasswordEncoder();
+//    }
+
+//    @Bean
+//    SecurityFilterChain defalutSecurityFilterChain(HttpSecurity http) throws Exception{
+//        http.csrf(csrf -> csrf.ignoringRequestMatchers("/saveMsg")
+//                .ignoringRequestMatchers(PathRequest.toH2Console()));
+//        http.authorizeHttpRequests(request ->
+//            request.requestMatchers("/courses").authenticated()
+//                    .requestMatchers("/dashboard").authenticated()
+//                    .anyRequest().permitAll()
+//                    .requestMatchers(PathRequest.toH2Console()).permitAll()
+//                    );
+//            http.formLogin(loginConfig -> loginConfig.loginPage("/login").permitAll()
+//                    .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true")
+//                    .permitAll()
+//
+//            );
+//            http.logout(logoutConfig -> logoutConfig.logoutSuccessUrl("/login?logout=true")
+//                    .invalidateHttpSession(true));
+//            http.httpBasic(Customizer.withDefaults());
+//           return http.build();
 //    }
 //}
